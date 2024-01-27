@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: '@Rajesh96'
+    url: jdbc:mysql://localhost:3306/rajesh
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rajeshkilladi96@gmail.com
+    password: ztny uldy kgii qomg
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
