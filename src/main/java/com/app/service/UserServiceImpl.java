@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.app.entites.Cities;
 import com.app.entites.Countries;
 import com.app.entites.States;
-import com.app.entites.User;
+import com.app.entites.UsersMaster;
 import com.app.repositories.CitiesRepository;
 import com.app.repositories.CountryRepository;
 import com.app.repositories.StatesRepository;
@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean register(RegisterFormBinding form) {
 
-		User user = new User();
+		UsersMaster user = new UsersMaster();
 		user.setPasswordUpdated("no");
 		BeanUtils.copyProperties(form, user);
 		usersRepo.save(user);
@@ -101,7 +101,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User login(LoginFormBinding form) {
+	public UsersMaster login(LoginFormBinding form) {
 
 		return usersRepo.findByEmailAndPassword(form.getEmail(), form.getPassword());
 	}
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean checkUser(String email) {
 
-		User user = usersRepo.findByEmail(email);
+		UsersMaster user = usersRepo.findByEmail(email);
 
 		if (user == null)
 			return false;
@@ -122,8 +122,8 @@ public class UserServiceImpl implements UserService {
 
 		if (form.getPassword().equals(form.getConfirmPassword())) {
 			
-			Optional<User> findById = usersRepo.findById(form.getUserId());
-			User user = findById.get();
+			Optional<UsersMaster> findById = usersRepo.findById(form.getUserId());
+			UsersMaster user = findById.get();
 			
 			user.setPassword(form.getPassword());
 

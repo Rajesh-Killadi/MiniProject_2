@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.app.entites.User;
+import com.app.entites.UsersMaster;
 import com.app.service.DashboardService;
 import com.app.service.UserService;
 import com.appbindings.DashboardBinding;
@@ -81,7 +81,7 @@ public class UserController {
 	@PostMapping(value = "/login")
 	public String login(@ModelAttribute("loginBinding")LoginFormBinding form,Model model , HttpServletRequest req) {
 
-			User login = userService.login(form);
+			UsersMaster login = userService.login(form);
 			if (login != null) {
 
 				HttpSession session = req.getSession(true);

@@ -2,7 +2,7 @@ package com.app.service;
 
 import java.util.Map;
 
-import com.app.entites.User;
+import com.app.entites.UsersMaster;
 import com.appbindings.LoginFormBinding;
 import com.appbindings.RegisterFormBinding;
 import com.appbindings.UpdatePasswordBinding;
@@ -13,7 +13,7 @@ public interface UserService {
 	public Map<Integer , String >getStates(Integer countryId);
 	public Map<Integer , String >getCities(Integer stateId);
 	public boolean register(RegisterFormBinding form);
-	public User login(LoginFormBinding form);
+	public UsersMaster login(LoginFormBinding form);
 	public boolean checkUser(String email);
 	boolean updatePassword(UpdatePasswordBinding form);
 }

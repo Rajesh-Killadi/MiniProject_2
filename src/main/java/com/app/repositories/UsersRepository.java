@@ -2,12 +2,12 @@ package com.app.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.app.entites.User;
+import com.app.entites.UsersMaster;
 
-public interface UsersRepository extends JpaRepository<User, Integer> {
+public interface UsersRepository extends JpaRepository<UsersMaster, Integer> {
 
-	User findByEmailAndPassword(String email, String password);
+	UsersMaster findByEmailAndPassword(String email, String password);
 
-	User findByEmail(String email);
+	UsersMaster findByEmail(String email);
 
 }
