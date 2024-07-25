@@ -16,7 +16,6 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "Students")
 public class User {
 
 	@Id
