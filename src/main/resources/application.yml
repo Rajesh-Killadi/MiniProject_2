@@ -1,9 +1,12 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: '@Rajesh96'
-    url: jdbc:mysql://localhost:3306/rajesh
-    username: root
+    driver-class-name: org.h2.Driver
+    password: rajesh
+    url: jdbc:h2:mem:testdb
+    username: sa
+  h2:
+    console:
+      enabled: true
   jpa:
     hibernate:
       ddl-auto: update
@@ -19,3 +22,5 @@ spring:
           auth: true
           starttls:
             enable: true
+   
+            
