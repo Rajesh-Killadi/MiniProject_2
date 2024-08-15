@@ -8,12 +8,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.app.entites.UsersMaster;
 import com.app.service.DashboardService;
 import com.app.service.UserService;
-import com.appbindings.DashboardBinding;
 import com.appbindings.LoginFormBinding;
 import com.appbindings.RegisterFormBinding;
 import com.appbindings.UpdatePasswordBinding;
@@ -62,8 +62,9 @@ public class UserController {
 	public String Register(Model model, @ModelAttribute("registerBinding")RegisterFormBinding form) {
 
 		boolean checkUser = userService.checkUser(form.getEmail());
-		if (checkUser == false) {
+		if (checkUser == true) {
 			model.addAttribute("registerResponse", "Email is Already Registred");
+			return "register";
 		}
 
 		boolean register = userService.register(form);
@@ -131,7 +132,7 @@ public class UserController {
 	
 	@PostMapping(value="getStates")
 	@ResponseBody
-	public Map<Integer, String> getStates(Integer countryId) {
+	public Map<Integer, String> getStates(@RequestParam("countryId")Integer countryId) {
 
 		return userService.getStates(countryId);
 	}

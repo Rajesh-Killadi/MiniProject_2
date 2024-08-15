@@ -40,7 +40,7 @@ public class DashboardServiceImpl implements DashboardService {
 
 			ObjectMapper mapper = new ObjectMapper();
 			try {
-				DashboardBinding[] quotesList = mapper.readValue(body, DashboardBinding[].class);
+				quotesList = mapper.readValue(body, DashboardBinding[].class);
 				
 			} catch (Exception e) {
 				e.printStackTrace();

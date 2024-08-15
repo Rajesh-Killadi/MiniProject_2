@@ -28,13 +28,14 @@ public class DashboardController {
 		return "dashboard";
 
 	}
+	
 	@GetMapping(value="/logout")
 	public String logout(Model mode , HttpServletRequest req) {
 		
 		HttpSession session = req.getSession(false);
 		session.invalidate();
 		
-		return "redirect:login";
+		return "redirect:/";
 		
 		
 	}

@@ -8,6 +8,8 @@ import java.util.Random;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.app.entites.Cities;
@@ -18,7 +20,6 @@ import com.app.repositories.CitiesRepository;
 import com.app.repositories.CountryRepository;
 import com.app.repositories.StatesRepository;
 import com.app.repositories.UsersRepository;
-import com.app.utils.EmailUtils;
 import com.appbindings.LoginFormBinding;
 import com.appbindings.RegisterFormBinding;
 import com.appbindings.UpdatePasswordBinding;
@@ -34,6 +35,8 @@ public class UserServiceImpl implements UserService {
 	private CitiesRepository citiesRepo;
 	@Autowired
 	private UsersRepository usersRepo;
+	@Autowired
+	private JavaMailSender mailSender;
 
 	@Override
 	public Map<Integer, String> getCountries() {
@@ -89,14 +92,19 @@ public class UserServiceImpl implements UserService {
 		UsersMaster user = new UsersMaster();
 		user.setPasswordUpdated("no");
 		BeanUtils.copyProperties(form, user);
-		usersRepo.save(user);
 
 		String generatedPwd = generatePassword();
+		
+		user.setPassword(generatedPwd);
+		
+		usersRepo.save(user);
 
 		String subject = "Password Generated";
 		String body = "Your Password is = " + generatedPwd;
+		
+//		EmailUtils emailUtils = new EmailUtils();
 
-		return EmailUtils.sendEmail(form.getEmail(), subject, body);
+		return sendEmail(form.getEmail(), subject, body);
 
 	}
 
@@ -151,5 +159,31 @@ public class UserServiceImpl implements UserService {
 
 		return new String(password);
 	}
+	
+	///// EMAIL SERVICE
+	
+	
+	/*
+	 * @Autowired public void setMailSender(JavaMailSender mailSender) {
+	 * System.out.println("mail sender is injecting"); this.mailSender = mailSender;
+	 * System.out.println(mailSender == null);
+	 * System.out.println("mail sender is injected ... .hureeeh"); }
+	 */
+
+	public boolean sendEmail(String to , String subject , String body) {
+		
+	   SimpleMailMessage message = new SimpleMailMessage();
+	   message.setTo(to);
+	   message.setSubject(subject);
+	   message.setText(body);
+	   
+	   mailSender.send(message);
+	   
+	   
+	   
+		return true;
+		
+	}
+
 
 }
